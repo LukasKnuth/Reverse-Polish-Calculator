@@ -20,10 +20,13 @@ namespace ReversePolishCalculator
 					values.Push ((symbol as ExpressionOperand).Value);
 				} else {
 					// Pop and calculate:
-					int l_value = values.Pop ();
 					int r_value = values.Pop ();
+					int l_value = values.Pop ();
 					// Do calculation:
-					values.Push ((symbol as ExpressionOperation).Evaluate (r_value, l_value));
+                    int res = (symbol as ExpressionOperation).Evaluate(l_value, r_value);
+                    values.Push (res);
+
+                    Console.WriteLine("\tEvaluating: {0} {1}{2} = {3}", l_value, symbol, r_value, res);
 				}
 			}
 			return values.Pop ();
